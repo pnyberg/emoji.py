@@ -1,0 +1,44 @@
+##########################
+### For-loop ####
+##########################
+
+@ for_loop (loop-action, less_than_bound)
+⛽
+	💬0💬🔢			# loop-index = 0
+	💬RESERVED_NAME_for_loop_helper💬📱🏃	# starting the loop
+
+	💬RESERVED_NAME_trash💬 📲		# remove the stuff from the stack
+
+🚘 💬for_loop💬 📲
+
+@ RESERVED_NAME_for_loop_helper (loop-action, less_than_bound, index)
+⛽
+	💬RESERVED_NAME_for_loop_helper_index💬 📲				# -----> save var helper_index
+	💬RESERVED_NAME_for_loop_helper_less_than_bound💬 📲			# -----> save var helper_lt_bound
+	💬RESERVED_NAME_for_loop_helper_index💬📱💬RESERVED_NAME_for_loop_helper_less_than_bound💬📱🐣💬RESERVED_NAME_for_loop_helper_comparison💬 📲
+	💬RESERVED_NAME_for_loop_helper_comparison💬📱🔚			# if index < less_than_bound
+		💬RESERVED_NAME_for_loop_helper_action💬 📲			# -----> save var helper_action
+
+		---------------------------------------------
+		----> save state on stack before action <----
+		---------------------------------------------
+		💬RESERVED_NAME_for_loop_helper_action💬📱			# put action on stack
+		💬RESERVED_NAME_for_loop_helper_less_than_bound💬📱		# put less_than_bound on stack
+		💬RESERVED_NAME_for_loop_helper_index💬📱			# put index on stack
+
+		-------------------------
+		----> Do the action <----
+		-------------------------
+		💬RESERVED_NAME_for_loop_helper_action💬📱🏃
+
+		---------------------------------------------------------
+		----> get index, ++ (which gets added on the stack) <----
+		---------------------------------------------------------
+		💬RESERVED_NAME_for_loop_helper_index💬 📲
+		💬RESERVED_NAME_for_loop_helper_index💬📱💬1💬🔢👫 		# put loop-index on stack (with ++)
+		💬RESERVED_NAME_for_loop_helper💬📱🏃				# re-call the loop
+	🐧
+	💬RESERVED_NAME_for_loop_helper_comparison💬📱🚴🔚			# else (index >= less_than_bound)
+		🚲 💬RESERVED_NAME_for_loop_helper_comparison💬 📲
+	🐧
+🚘 💬RESERVED_NAME_for_loop_helper💬 📲

@@ -1,0 +1,141 @@
+###########################
+### Defining Quicksort ####
+###########################
+
+@ quicksort (list-reference)
+⛽
+	# save list-reference in variable
+	💬DNU_qsort_list_reference💬📲
+
+	# list-reference -> stack
+	💬DNU_qsort_list_reference💬📱
+	# start-index -> stack
+	💬0💬🔢💿
+	# less-than-bound -> stack
+	💬DNU_qsort_list_reference💬📱📱📃
+
+	# call on helper method
+	💬quicksort_helper💬📱🏃
+🚘 💬quicksort💬 📲
+
+
+@ quicksort_helper (list-reference, start_index, less_than_bound)
+⛽
+	# saving the parameters in variables
+	💬DNU_qsort_less_than_bound💬📲 # bound
+	💬DNU_qsort_index💬📲 # index
+	💬DNU_qsort_list_reference💬📲 # list
+
+	# checking if list can be sorted more (less-than-bound - start-index > 1)
+	💬DNU_qsort_less_than_bound💬📱 💬DNU_qsort_index💬📱 🌊💿 💬1💬🔢💿 🐔 💬DNU_qsort_more_recursing💬📲
+
+	# if list could be sorted more, call on swapper-checker
+	💬DNU_qsort_more_recursing💬📱 🔚 
+		# take list, pivot_index, less_than_bound as parameters
+		# take final pivot index and split on it (two helper-calls, left and right)
+		💬DNU_qsort_list_reference💬📱 💬DNU_qsort_index💬📱 💬DNU_qsort_less_than_bound💬📱 💬quicksort_swapper_checker💬📱🏃
+		💬DNU_qsort_final_pivot💬📲 # final pivot-index from swapper_checker
+
+		💬DNU_qsort_final_pivot💬📱 # save this value to stack
+		💬DNU_qsort_less_than_bound💬📱 # save this value to stack
+
+		# take list, start_index, less_than_bound (final pivot) as parameters - left call
+		💬DNU_qsort_list_reference💬📱 💬DNU_qsort_index💬📱 💬DNU_qsort_final_pivot💬📱 💬quicksort_helper💬📱🏃
+
+		💬DNU_qsort_less_than_bound💬📲 # get this value from stack
+		💬DNU_qsort_final_pivot💬📲 # get this value from stack
+
+		# take list, start_index (final pivot + 1), less_than_bound as parameters - right call
+		💬DNU_qsort_list_reference💬📱 💬DNU_qsort_final_pivot💬📱 💬1💬🔢 👫💿 💬DNU_qsort_less_than_bound💬📱 💬quicksort_helper💬📱🏃
+	🐧
+🚘 💬quicksort_helper💬 📲
+
+@ quicksort_swapper_checker (list-reference, pivot_index, less_than_bound)
+	$ return final_pivot_index
+⛽
+	# saving the parameters in variables
+	💬DNU_qsort_check_less_than_bound💬📲 # less-than-bound
+	💬DNU_qsort_check_pivot_index💬📲 # pivot-index
+	💬DNU_qsort_list_reference💬📲 # list-reference
+
+	# creating variables
+	💬DNU_qsort_check_less_than_bound💬📱 💬1💬🔢💿 🌊 💬DNU_qsort_check_compare_index💬📲
+	🚲 💬pivot_less_than_compare💬📲
+
+	💬DNU_qsort_check_less_than_bound💬📱 💬1💬🔢💿 🌊 💬DNU_qsort_check_pivot_index💬📱 🌊 💬DNU_qsort_loop_rounds💬📲
+
+	⛽
+		💬DNU_qsort_list_reference💬📱📱 💬DNU_qsort_check_pivot_index💬📱 🔑 💬DNU_qsort_check_pivot_element💬📲
+		💬DNU_qsort_list_reference💬📱📱 💬DNU_qsort_check_compare_index💬📱 🔑 💬DNU_qsort_check_compare_element💬📲
+
+		# if pivot has less index than compare-index
+		💬pivot_less_than_compare💬📱 🔚
+			💬DNU_qsort_check_pivot_element💬📱 💬DNU_qsort_check_compare_element💬📱 🐔 💬DNU_qsort_check_should_swap💬📲
+		🐧
+		# else check when pivot has higher index than compare-index
+		💬pivot_less_than_compare💬📱 🚴 🔚
+			💬DNU_qsort_check_pivot_element💬📱 💬DNU_qsort_check_compare_element💬📱 🐣 💬DNU_qsort_check_should_swap💬📲
+		🐧
+
+		💬DNU_qsort_check_should_swap💬📱 🔚
+			💬DNU_qsort_list_reference💬📱 💬DNU_qsort_check_pivot_index💬📱 💬DNU_qsort_check_compare_index💬📱 💬quicksort_swap💬📱🏃
+
+			# swap values between pivot- and compare-index-variables
+			💬DNU_qsort_check_pivot_index💬📱 💬temp💬📲
+			💬DNU_qsort_check_compare_index💬📱💿 💬DNU_qsort_check_pivot_index💬📲
+			💬temp💬📱💿 💬DNU_qsort_check_compare_index💬📲
+
+			# when pivot change side
+			💬pivot_less_than_compare💬📱 🚴 💬pivot_less_than_compare💬📲
+		🐧
+		💬pivot_less_than_compare💬📱 🔚
+			💬DNU_qsort_check_compare_index💬📱 💬1💬🔢 🌊💿 💬DNU_qsort_check_compare_index💬📲
+		🐧
+		💬pivot_less_than_compare💬📱 🚴 🔚
+			💬DNU_qsort_check_compare_index💬📱 💬1💬🔢 👫💿 💬DNU_qsort_check_compare_index💬📲
+		🐧
+	🚘💬DNU_qsort_loop_rounds💬📱 💬for_loop💬📱🏃
+
+	# return final pivot-index value
+	💬DNU_qsort_check_pivot_index💬📱 
+🚘 💬quicksort_swapper_checker💬 📲
+
+@ quicksort_swap (list-reference, index_1, index_2)
+⛽
+	# saving the parameters in variables
+	💬DNU_qsort_swap_index_2💬📲 # index-2
+	💬DNU_qsort_swap_index_1💬📲 # index-1
+	💬DNU_qsort_list_reference💬📲 # list-reference
+
+	# create some useful variables
+	💬DNU_qsort_list_reference💬📱📱 💬DNU_qsort_old_list💬📲
+	📚 💬DNU_qsort_new_list💬📲
+	💬DNU_qsort_old_list💬📱📃 💬DNU_qsort_old_list_length💬📲
+
+	💬0💬🔢💿 💬i💬📲
+	# for-loop for making new list with swap (index1<->index2)
+	⛽
+		💬i💬📱 💬DNU_qsort_swap_index_1💬📱 👬 💬bool_i_index_1💬📲
+		💬i💬📱 💬DNU_qsort_swap_index_2💬📱 👬 💬bool_i_index_2💬📲
+		🚲 💬bool_else💬📲
+
+		# if i == index-1
+		💬bool_i_index_1💬📱 🔚
+			💬DNU_qsort_new_list💬📱 💬DNU_qsort_old_list💬📱 💬DNU_qsort_swap_index_2💬📱 🔑 📌
+			🚳 💬bool_else💬📲
+		🐧
+		# if i == index-2
+		💬bool_i_index_2💬📱 🔚
+			💬DNU_qsort_new_list💬📱 💬DNU_qsort_old_list💬📱 💬DNU_qsort_swap_index_1💬📱 🔑 📌
+			🚳 💬bool_else💬📲
+		🐧
+		# else
+		💬bool_else💬📱 🔚
+			💬DNU_qsort_new_list💬📱 💬DNU_qsort_old_list💬📱 💬i💬📱 🔑 📌
+		🐧
+		💬1💬🔢 💬i💬📱 👫💿 💬i💬📲
+	🚘 💬DNU_qsort_old_list_length💬📱 💬for_loop💬📱🏃
+
+	# set new-list as the main-list
+	💬DNU_qsort_new_list💬📱 💬DNU_qsort_list_reference💬📱📲
+🚘 💬quicksort_swap💬 📲
