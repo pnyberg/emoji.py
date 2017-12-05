@@ -2,7 +2,6 @@
 import sys
 import traceback
 def parseChar(data, char):
-	print(data, char)
 	blockStarts = (
 		"\U0001f51a", # end with arrow (if)
 		"\U0001f519" # back with arrow (else)
